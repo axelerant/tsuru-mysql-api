@@ -1,0 +1,6 @@
+id: mysqlapi
+username: badri
+password: password
+endpoint:
+  production: blog.192.168.50.4.nip.io
+  test: localhost:8000
