@@ -67,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "blog.api.middleware.ExceptionLoggingMiddleware",
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -88,6 +89,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'blog.posts',
+    "blog.api",
 )
 
 LOGGING = {
@@ -113,3 +115,33 @@ LOGGING = {
         },
     }
 }
+RESERVED_NAMES = ("mysql", "test", "information_schema", "mysqlapi")
+SHARED_SERVER = os.environ.get("MYSQLAPI_SHARED_SERVER")
+SHARED_SERVER_PUBLIC_HOST = os.environ.get(
+    "MYSQLAPI_SHARED_SERVER_PUBLIC_HOST",
+    SHARED_SERVER,
+)
+SHARED_USER = os.environ.get("MYSQLAPI_SHARED_USER", "root")
+SHARED_PASSWORD = os.environ.get("MYSQLAPI_SHARED_PASSWORD", "")
+
+USE_POOL = os.environ.get("MYSQLAPI_USE_POOL", "False") in \
+    ("True", "true", "1")
+
+EC2_ENDPOINT = os.environ.get("MYSQLAPI_EC2_ENDPOINT")
+EC2_PORT = os.environ.get("MYSQLAPI_EC2_PORT")
+EC2_PATH = os.environ.get("MYSQLAPI_EC2_PATH")
+EC2_ACCESS_KEY = os.environ.get("MYSQLAPI_EC2_ACCESS_KEY")
+EC2_SECRET_KEY = os.environ.get("MYSQLAPI_EC2_SECRET_KEY")
+EC2_AMI = os.environ.get("MYSQLAPI_EC2_AMI")
+EC2_KEY_NAME = os.environ.get("MYSQLAPI_EC2_KEY_NAME")
+EC2_POLL_INTERVAL = int(os.environ.get("MYSQLAPI_EC2_POLL_INTERVAL", 10))
+
+S3_ACCESS_KEY = os.environ.get("TSURU_S3_ACCESS_KEY_ID")
+S3_SECRET_KEY = os.environ.get("TSURU_S3_SECRET_KEY")
+S3_BUCKET = os.environ.get("TSURU_S3_BUCKET")
+
+SALT = os.environ.get("MYSQLAPI_SALT", "")
+
+ALLOWED_HOSTS = [
+    os.environ.get("MYSQLAPI_ALLOWED_HOST", "localhost"),
+]
