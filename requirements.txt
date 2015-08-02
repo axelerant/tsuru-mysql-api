@@ -4,4 +4,3 @@ South==0.8.1
 gunicorn==17.5
 boto==2.7.0
 crane-ec2==0.2.1
-gevent==0.13.8
