@@ -1,4 +1,3 @@
-#tsuru-django-sample
+#tsuru-mysql-api
 
-This is the example project used in the guide "Deploying Python applications in
-tsuru".
+Django based MySQL service for Tsuru.
